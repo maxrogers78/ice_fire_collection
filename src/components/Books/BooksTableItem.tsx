@@ -54,10 +54,15 @@ const BooksTableItem = ({ row, openModal }: Props) => {
     <motion.tr
       initial={row.index % 2 === 0 ? { x: 20 } : { x: -20 }}
       animate={{ x: 0 }}
-      className="hover:bg-sky-100 child:p-3"
+      className={`hover:bg-gray-300 child:p-3
+        ${row.index % 2 === 0 ? 'bg-gray-200' : 'bg-gray-100'}
+      `}
     >
-      {row.cells.map((cell) => (
-        <td {...cell.getCellProps()}>
+      {row.cells.map((cell, i) => (
+        <td
+          {...cell.getCellProps()}
+          className={`${i === 0 ? 'font-bold' : ''}`}
+        >
           {cell.render('Cell', {
             handleToggleFavorite,
             handleOpenModal,

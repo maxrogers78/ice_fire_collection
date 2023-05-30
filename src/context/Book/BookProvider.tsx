@@ -1,10 +1,17 @@
 import { useEffect, useReducer } from 'react';
 import { BookContext, bookReducer } from '.';
-import { IBook, IBookState } from '../../interfaces';
+import {
+  IBook,
+  IBookFilterValues,
+  IBookNew,
+  IBookState
+} from '../../interfaces';
 import { getBooksRequest } from '../../api';
+import { generateRandomString } from '../../utils';
 
 const INITIAL_STATE: IBookState = {
   books: [],
+  filteredBooks: [],
   favoriteBooks: [],
   selectedBook: undefined
 };
@@ -32,6 +39,7 @@ const BookProvider = ({ children }: IBookProviderProps) => {
       id: i + 1
     }));
     dispatch({ type: 'getBooks', payload: books });
+    dispatch({ type: 'getFilteredBooks', payload: books });
   };
 
   const addFavoriteBook = (id: IBook['isbn']) => {
@@ -73,6 +81,46 @@ const BookProvider = ({ children }: IBookProviderProps) => {
     dispatch({ type: 'selectBook', payload: foundBook });
   };
 
+  const filterBooks = (filters: IBookFilterValues) => {
+    const books = state.books.filter(
+      (book) =>
+        book.name
+          .toLowerCase()
+          .trim()
+          .includes(filters.name.toLowerCase().trim()) &&
+        book.authors.some((author) =>
+          author
+            .toLowerCase()
+            .trim()
+            .includes(filters.author.toLowerCase().trim())
+        )
+    );
+
+    dispatch({ type: 'getFilteredBooks', payload: books });
+  };
+
+  const resetBooksToDefault = () => {
+    dispatch({ type: 'getFilteredBooks', payload: state.books });
+  };
+
+  const addNewBook = (bookValues: IBookNew) => {
+    const newBook: IBook = {
+      ...bookValues,
+      numberOfPages: 0,
+      authors: [bookValues.author],
+      characters: [],
+      povCharacters: [],
+      country: 'Chile',
+      id: state.books.length + 1,
+      isbn: generateRandomString(15),
+      mediaType: bookValues.genre,
+      publisher: 'Grupo Aspasia',
+      url: 'https://grupoaspasia.com/es/'
+    };
+
+    dispatch({ type: 'addNewBook', payload: newBook });
+  };
+
   return (
     <BookContext.Provider
       value={{
@@ -80,7 +128,10 @@ const BookProvider = ({ children }: IBookProviderProps) => {
         getBooks,
         addFavoriteBook,
         removeFavoriteBook,
-        selectBook
+        selectBook,
+        filterBooks,
+        resetBooksToDefault,
+        addNewBook
       }}
     >
       {children}

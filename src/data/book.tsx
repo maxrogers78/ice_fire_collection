@@ -27,13 +27,17 @@ export const BOOKS_TABLE_HEADERS: Column[] = [
     Header: 'Acciones',
     Cell: (props: any) => (
       <div className="flex items-center justify-center gap-2">
-        <button type="button" onClick={props.handleOpenModal}>
+        <button
+          type="button"
+          onClick={props.handleOpenModal}
+          className="hover:opacity-80"
+        >
           <BiDetail className="h-6 w-6 text-sky-600" />
         </button>
 
         <button
           type="button"
-          className="text-amber-500 child:h-6 child:w-6"
+          className="text-amber-500 hover:opacity-80 child:h-6 child:w-6"
           onClick={props.handleToggleFavorite}
         >
           {props.isFavorite ? <AiFillStar /> : <AiOutlineStar />}

@@ -6,5 +6,3 @@ const bookFetcher = axios.create({
 
 // Requests
 export const getBooksRequest = async () => await bookFetcher.get('/books');
-export const getSingleBookRequest = async (id: number) =>
-  await bookFetcher.get(`/books/${id}`);

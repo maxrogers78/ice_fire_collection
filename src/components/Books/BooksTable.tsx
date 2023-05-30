@@ -8,7 +8,7 @@ import { BooksTableItem } from '.';
 import { BookDetailsModal } from '../../modals';
 
 const BooksTable = () => {
-  const { books, selectedBook } = useBook();
+  const { filteredBooks, selectedBook } = useBook();
   const [booksInTable, setBooksInTable] = useState<IBookTable[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const data = useMemo(() => booksInTable, [booksInTable]);
@@ -18,14 +18,14 @@ const BooksTable = () => {
 
   useEffect(() => {
     setBooksInTable(
-      books.map((book) => ({
+      filteredBooks.map((book) => ({
         ...book,
         characters: book.characters.length,
         povCharacters: book.povCharacters.length,
         released: moment(book.released).utc().format('DD/MM/YYYY')
       }))
     );
-  }, [books]);
+  }, [filteredBooks]);
 
   return (
     <div className="w-full">

@@ -1,5 +1,6 @@
 export interface IBookState {
   books: IBook[];
+  filteredBooks: IBook[];
   favoriteBooks: IBook['isbn'][];
   selectedBook: IBook | undefined;
 }
@@ -31,4 +32,16 @@ export interface IBookTable {
   released: string;
   characters: number;
   povCharacters: number;
+}
+
+export interface IBookFilterValues {
+  name: string;
+  author: string;
+}
+
+export interface IBookNew {
+  name: string;
+  author: string;
+  genre: string;
+  released: string;
 }
