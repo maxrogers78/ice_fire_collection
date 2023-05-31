@@ -3,6 +3,7 @@
   "author": "Max Rogers",
   "private": true,
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -10,7 +11,8 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll",
+    "check": "tsc --noEmit"
   },
   "dependencies": {
     "@headlessui/react": "1.7.14",

@@ -1,6 +1,7 @@
 import { AiOutlineReload } from 'react-icons/ai';
 import { BiSearch } from 'react-icons/bi';
 import { useFormik } from 'formik';
+import { motion } from 'framer-motion';
 import { IBookFilterValues } from '../../interfaces';
 import { Button, Input } from '../';
 import { useBook } from '../../hooks';
@@ -27,7 +28,7 @@ const BooksFilters = () => {
   };
 
   return (
-    <div className="w-full flex-1 rounded-lg bg-gray-100 px-12 py-6">
+    <motion.div className="w-full flex-1 rounded-lg bg-gray-100 px-12 py-6">
       <h2 className="font-bold uppercase">Filtros</h2>
 
       <form
@@ -59,7 +60,7 @@ const BooksFilters = () => {
           <AiOutlineReload className="transition-transform group-hover:rotate-180" />
         </button>
       </form>
-    </div>
+    </motion.div>
   );
 };
 

@@ -24,7 +24,7 @@ export interface IBookTable {
   url: string;
   name: string;
   isbn: string;
-  authors: string[];
+  author: string;
   numberOfPages: number;
   publisher: string;
   country: string;

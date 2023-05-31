@@ -25,12 +25,31 @@ const BookProvider = ({ children }: IBookProviderProps) => {
 
   useEffect(() => {
     if (localStorage.getItem('favoriteBooks')) {
+      const favoriteBooks: IBook['isbn'][] = JSON.parse(
+        localStorage.getItem('favoriteBooks')!
+      );
+      let favoriteBooksToSave = favoriteBooks;
+
+      if (state.books.length > 0) {
+        favoriteBooks.forEach((isbn) => {
+          if (!state.books.find((book) => book.isbn === isbn)) {
+            favoriteBooksToSave = favoriteBooksToSave.filter(
+              (item) => item !== isbn
+            );
+          }
+        });
+      }
+
+      localStorage.setItem(
+        'favoriteBooks',
+        JSON.stringify(favoriteBooksToSave)
+      );
       dispatch({
         type: 'getFavoriteBooks',
-        payload: JSON.parse(localStorage.getItem('favoriteBooks')!)
+        payload: favoriteBooksToSave
       });
     }
-  }, []);
+  }, [state.books]);
 
   const getBooks = async (): Promise<void> => {
     const { data } = await getBooksRequest();

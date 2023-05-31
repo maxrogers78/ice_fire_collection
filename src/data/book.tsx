@@ -12,12 +12,12 @@ export const BOOKS_TABLE_HEADERS: Column[] = [
     accessor: 'name'
   },
   {
-    Header: 'Editorial',
-    accessor: 'publisher'
+    Header: 'Autor',
+    accessor: 'author'
   },
   {
-    Header: 'Cant. personajes POV',
-    accessor: 'povCharacters'
+    Header: 'Editorial',
+    accessor: 'publisher'
   },
   {
     Header: 'Fecha de publicación',
