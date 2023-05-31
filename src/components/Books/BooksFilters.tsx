@@ -1,6 +1,6 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
 import { AiOutlineReload } from 'react-icons/ai';
 import { BiSearch } from 'react-icons/bi';
+import { useFormik } from 'formik';
 import { IBookFilterValues } from '../../interfaces';
 import { Button, Input } from '../';
 import { useBook } from '../../hooks';
@@ -12,20 +12,17 @@ const INITIAL_VALUES: IBookFilterValues = {
 
 const BooksFilters = () => {
   const { filterBooks, resetBooksToDefault } = useBook();
-  const [filterValues, setFilterValues] = useState(INITIAL_VALUES);
+  const { values, handleChange, handleSubmit, resetForm } = useFormik({
+    initialValues: INITIAL_VALUES,
+    onSubmit: (values) => handleFilterBooks(values)
+  });
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFilterValues({ ...filterValues, [name]: value });
-  };
-
-  const handleFilterBooks = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    filterBooks(filterValues);
+  const handleFilterBooks = async (values: IBookFilterValues) => {
+    filterBooks(values);
   };
 
   const handleResetFilters = () => {
-    setFilterValues(INITIAL_VALUES);
+    resetForm();
     resetBooksToDefault();
   };
 
@@ -34,22 +31,22 @@ const BooksFilters = () => {
       <h2 className="font-bold uppercase">Filtros</h2>
 
       <form
-        onSubmit={handleFilterBooks}
+        onSubmit={handleSubmit}
         className="mt-4 flex w-full items-stretch justify-between gap-4"
       >
         <Input
           id="name"
           name="name"
-          value={filterValues.name}
-          onChange={handleInputChange}
+          value={values.name}
+          onChange={handleChange}
           placeholder="Título"
         />
 
         <Input
           id="author"
           name="author"
-          value={filterValues.author}
-          onChange={handleInputChange}
+          value={values.author}
+          onChange={handleChange}
           placeholder="Autor"
         />
 

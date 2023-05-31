@@ -3,7 +3,7 @@ import { AiOutlinePlusCircle } from 'react-icons/ai';
 import { useBook } from '../hooks';
 import { BooksFilters, Button, Loader } from '../components';
 import { BooksTable } from '../components';
-import { AddBookModal } from '../modals';
+import { AddBookModal, CustomModal } from '../modals';
 
 const BooksPage = () => {
   const { getBooks } = useBook();
@@ -43,7 +43,13 @@ const BooksPage = () => {
         </div>
       </div>
 
-      <AddBookModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
+      <CustomModal
+        isOpen={isModalOpen}
+        setIsOpen={setIsModalOpen}
+        title="Agregar libro"
+      >
+        <AddBookModal setIsOpen={setIsModalOpen} />
+      </CustomModal>
     </div>
   );
 };

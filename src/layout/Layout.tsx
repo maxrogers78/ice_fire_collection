@@ -9,7 +9,7 @@ const Layout = ({ children }: Props) => {
     <div>
       <Navbar />
 
-      <main className="grid h-[calc(100vh-76px)] bg-gray-50 px-24 py-12">
+      <main className="grid min-h-[calc(100vh-76px)] bg-gray-50 px-24 py-12">
         {children}
       </main>
     </div>
