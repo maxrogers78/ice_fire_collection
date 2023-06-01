@@ -3,8 +3,8 @@ import { BiSearch } from 'react-icons/bi';
 import { useFormik } from 'formik';
 import { motion } from 'framer-motion';
 import { IBookFilterValues } from '../../interfaces';
-import { Button, Input } from '../';
 import { useBook } from '../../hooks';
+import { Button, Input } from '../';
 
 const INITIAL_VALUES: IBookFilterValues = {
   name: '',

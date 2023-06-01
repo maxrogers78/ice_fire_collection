@@ -3,6 +3,7 @@ import { useFormik } from 'formik';
 import { Input } from '../components';
 import { IBookNew } from '../interfaces';
 import { useBook } from '../hooks';
+import moment from 'moment';
 
 const INITIAL_VALUES: IBookNew = {
   name: '',
@@ -65,6 +66,7 @@ const AddBookModal = ({ setIsOpen }: Props) => {
           onChange={handleChange}
           placeholder="Fecha de publicación"
           required
+          max={moment().format('YYYY-MM-DD')}
         />
       </div>
 

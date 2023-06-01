@@ -8,6 +8,7 @@ import {
 } from '../../interfaces';
 import { getBooksRequest } from '../../api';
 import { generateRandomString } from '../../utils';
+import { useNavigate } from 'react-router-dom';
 
 const INITIAL_STATE: IBookState = {
   books: [],
@@ -22,6 +23,7 @@ interface IBookProviderProps {
 
 const BookProvider = ({ children }: IBookProviderProps) => {
   const [state, dispatch] = useReducer(bookReducer, INITIAL_STATE);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (localStorage.getItem('favoriteBooks')) {
@@ -52,13 +54,21 @@ const BookProvider = ({ children }: IBookProviderProps) => {
   }, [state.books]);
 
   const getBooks = async (): Promise<void> => {
-    const { data } = await getBooksRequest();
-    const books = data.map((book: IBook, i: number) => ({
-      ...book,
-      id: i + 1
-    }));
-    dispatch({ type: 'getBooks', payload: books });
-    dispatch({ type: 'getFilteredBooks', payload: books });
+    try {
+      dispatch({ type: 'getBooks', payload: [] });
+      dispatch({ type: 'getFilteredBooks', payload: [] });
+
+      const { data } = await getBooksRequest();
+      const books = data.map((book: IBook, i: number) => ({
+        ...book,
+        id: i + 1
+      }));
+
+      dispatch({ type: 'getBooks', payload: books });
+      dispatch({ type: 'getFilteredBooks', payload: books });
+    } catch (error) {
+      navigate('/500');
+    }
   };
 
   const addFavoriteBook = (id: IBook['isbn']) => {

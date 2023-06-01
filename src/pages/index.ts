@@ -1,3 +1,4 @@
 export { default as BooksPage } from './BooksPage';
+export { default as FavoriteBooksPage } from './FavoriteBooksPage';
 
-export { default as NotFoundPage } from './NotFoundPage';
+export * from './error';

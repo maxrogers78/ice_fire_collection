@@ -13,7 +13,11 @@ const Navbar = () => {
       </Link>
 
       <ul>
-        <li>Favoritos ({favoriteBooks.length})</li>
+        <li>
+          <Link to="/favorites" className="hover:text-sky-500">
+            Favoritos ({favoriteBooks.length})
+          </Link>
+        </li>
       </ul>
     </header>
   );

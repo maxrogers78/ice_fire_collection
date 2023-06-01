@@ -1,71 +1,62 @@
-import { Dispatch, SetStateAction, Fragment } from 'react';
-import { Dialog, Transition } from '@headlessui/react';
+import { Dispatch, SetStateAction } from 'react';
 import { IBook } from '../interfaces';
+import moment from 'moment';
 
 interface Props {
-  isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   book: IBook;
 }
 
-const BookDetailsModal = ({ isOpen, setIsOpen, book }: Props) => {
+const BookDetailsModal = ({ setIsOpen, book }: Props) => {
   return (
-    <Transition appear show={isOpen} as={Fragment}>
-      <Dialog
-        as="div"
-        className="relative z-10"
-        onClose={() => setIsOpen(false)}
-      >
-        <Transition.Child
-          as={Fragment}
-          enter="ease-out duration-300"
-          enterFrom="opacity-0"
-          enterTo="opacity-100"
-          leave="ease-in duration-200"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
+    <div className="w-full">
+      <div className="">
+        <h2 className="text-lg font-semibold">{book.name}</h2>
+        <h4 className="text-xs font-light">{book.isbn}</h4>
+      </div>
+
+      <hr className="my-4" />
+
+      <div className="grid grid-cols-2 gap-4">
+        <BookDetailInfo name="Autor" value={book.authors[0]} />
+        <BookDetailInfo name="Editorial" value={book.publisher} />
+        <BookDetailInfo
+          name="Fecha de publicación"
+          value={moment(book.released).format('DD/MM/YYYY')}
+        />
+        <BookDetailInfo name="País" value={book.country} />
+        <BookDetailInfo name="Tipo" value={book.mediaType} />
+        <BookDetailInfo name="Páginas" value={book.numberOfPages} />
+        <BookDetailInfo
+          name="Protagonistas"
+          value={book.povCharacters.length}
+        />
+        <BookDetailInfo name="Personajes" value={book.characters.length} />
+      </div>
+
+      <div className="mt-4 flex items-center justify-end gap-4">
+        <button
+          type="button"
+          className="inline-flex justify-center rounded-md border border-transparent bg-gray-100 px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2"
+          onClick={() => setIsOpen(false)}
         >
-          <div className="fixed inset-0 bg-black bg-opacity-25" />
-        </Transition.Child>
-
-        <div className="fixed inset-0 overflow-y-auto">
-          <div className="flex min-h-full items-center justify-center p-4 text-center">
-            <Transition.Child
-              as={Fragment}
-              enter="ease-out duration-300"
-              enterFrom="opacity-0 scale-95"
-              enterTo="opacity-100 scale-100"
-              leave="ease-in duration-200"
-              leaveFrom="opacity-100 scale-100"
-              leaveTo="opacity-0 scale-95"
-            >
-              <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                <Dialog.Title
-                  as="h3"
-                  className="text-lg font-medium leading-6 text-gray-900"
-                >
-                  {book.name}
-                </Dialog.Title>
-                <div className="mt-2">
-                  <p className="text-sm text-gray-500">{book.url}</p>
-                </div>
-
-                <div className="mt-4">
-                  <button
-                    type="button"
-                    className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Got it, thanks!
-                  </button>
-                </div>
-              </Dialog.Panel>
-            </Transition.Child>
-          </div>
-        </div>
-      </Dialog>
-    </Transition>
+          Cancelar
+        </button>
+      </div>
+    </div>
   );
 };
+
+interface BookDetailInfoProps {
+  name: string;
+  value: string | number;
+}
+
+const BookDetailInfo = ({ name, value }: BookDetailInfoProps) => (
+  <div>
+    <p>{name}</p>
+    <p>{value}</p>
+  </div>
+);
 
 export default BookDetailsModal;

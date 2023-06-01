@@ -58,9 +58,7 @@ const Input = ({
         name={name}
         value={value}
         onChange={onChange}
-        className={`peer w-full px-5 pb-2 pt-6 font-light outline-none ${classes}
-            ${value.toString().length > 0 ? '' : ''}
-        `}
+        className={`peer w-full px-5 pb-2 pt-6 font-light outline-none ${classes}`}
         max={max}
         min={min}
         required={required}

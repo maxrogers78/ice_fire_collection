@@ -22,7 +22,7 @@ Debe tener instalado Node.js en su equipo
 - TailwindCSS
 - react-table
 - Formik
-- Jest
+- Jest (vitest)
 - Storybook
 - Context API (propia de React)
 
@@ -41,3 +41,7 @@ Debe tener instalado Node.js en su equipo
 - ¿Qué harías de manera diferente si se le asignara más tiempo?
   - Tendría una mejor planificación de diseño ya que utilicé estilos básicos, simples y agradables a la vista, pero siento que puedo mejorar tanto el diseño como la interactividad.
   - También hubiese dedicado más tiempo a leer la documentación de tecnologías que no había utilizado previamente (Jest y Storybook), a pesar que pude aprender la base rápidamente me hubiese gustado indagar aún más para entender las buenas prácticas y la mayor cantidad de funcionalidades posible que cada tecnología ofrece.
+
+## Observaciones
+
+-

@@ -1,6 +1,11 @@
 import { Routes, Route } from 'react-router-dom';
 import { Layout } from './layout';
-import { BooksPage, NotFoundPage } from './pages';
+import {
+  BooksPage,
+  FavoriteBooksPage,
+  NotFoundPage,
+  ServerErrorPage
+} from './pages';
 
 const App = () => {
   return (
@@ -10,6 +15,24 @@ const App = () => {
         element={
           <Layout>
             <BooksPage />
+          </Layout>
+        }
+      />
+
+      <Route
+        path="/favorites"
+        element={
+          <Layout>
+            <FavoriteBooksPage />
+          </Layout>
+        }
+      />
+
+      <Route
+        path="500"
+        element={
+          <Layout>
+            <ServerErrorPage />
           </Layout>
         }
       />
