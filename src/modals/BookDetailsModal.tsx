@@ -1,6 +1,7 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { IBook } from '../interfaces';
 import moment from 'moment';
+import { useBook } from '../hooks';
 
 interface Props {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
@@ -8,6 +9,25 @@ interface Props {
 }
 
 const BookDetailsModal = ({ setIsOpen, book }: Props) => {
+  const { favoriteBooks, addFavoriteBook, removeFavoriteBook } = useBook();
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  useEffect(() => {
+    if (favoriteBooks.includes(book.isbn)) {
+      setIsFavorite(true);
+    } else {
+      setIsFavorite(false);
+    }
+  }, [favoriteBooks]);
+
+  const handleToggleFavorite = () => {
+    if (isFavorite) {
+      removeFavoriteBook(book.isbn);
+    } else {
+      addFavoriteBook(book.isbn);
+    }
+  };
+
   return (
     <div className="w-full">
       <div className="text-center">
@@ -45,6 +65,14 @@ const BookDetailsModal = ({ setIsOpen, book }: Props) => {
       </div>
 
       <div className="mt-4 flex items-center justify-end gap-4 border-t pt-4">
+        <button
+          type="button"
+          className="inline-flex justify-center rounded-md border border-transparent bg-amber-200/50 px-4 py-2 text-sm font-medium text-amber-900 hover:bg-amber-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2"
+          onClick={handleToggleFavorite}
+        >
+          {isFavorite ? 'Quitar de favoritos' : 'Añadir a favoritos'}
+        </button>
+
         <button
           type="button"
           className="inline-flex justify-center rounded-md border border-transparent bg-gray-200/50 px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2"

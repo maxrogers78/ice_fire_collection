@@ -35,6 +35,10 @@ export const Full: Story = {
       {
         text: 'Daenerys Targaryen',
         value: '3'
+      },
+      {
+        text: 'Tyrion Lannister',
+        value: '4'
       }
     ]
   }

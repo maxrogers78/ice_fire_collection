@@ -12,13 +12,18 @@ const config: StorybookConfig = {
       }
     }
   ],
-
+  core: {
+    builder: '@storybook/builder-vite'
+  },
   framework: {
     name: '@storybook/react-vite',
     options: {}
   },
   docs: {
     autodocs: 'tag'
+  },
+  typescript: {
+    reactDocgen: 'react-docgen-typescript'
   }
 };
 export default config;

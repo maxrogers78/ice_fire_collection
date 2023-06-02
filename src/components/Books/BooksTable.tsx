@@ -30,7 +30,7 @@ const BooksTable = () => {
   }, [filteredBooks]);
 
   return (
-    <div className="h-full w-full overflow-x-scroll">
+    <div className="h-full w-full overflow-x-auto">
       {filteredBooks.length > 0 ? (
         <table {...getTableProps()} className="w-full table-auto text-center">
           <thead className="bg-sky-600 font-bold text-gray-100">

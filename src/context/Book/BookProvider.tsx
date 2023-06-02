@@ -11,6 +11,7 @@ import { generateRandomString } from '../../utils';
 import { useNavigate } from 'react-router-dom';
 
 const INITIAL_STATE: IBookState = {
+  isFetching: true,
   books: [],
   filteredBooks: [],
   favoriteBooks: [],
@@ -24,6 +25,10 @@ interface IBookProviderProps {
 const BookProvider = ({ children }: IBookProviderProps) => {
   const [state, dispatch] = useReducer(bookReducer, INITIAL_STATE);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    getBooks();
+  }, []);
 
   useEffect(() => {
     if (localStorage.getItem('favoriteBooks')) {
@@ -55,9 +60,6 @@ const BookProvider = ({ children }: IBookProviderProps) => {
 
   const getBooks = async (): Promise<void> => {
     try {
-      dispatch({ type: 'getBooks', payload: [] });
-      dispatch({ type: 'getFilteredBooks', payload: [] });
-
       const { data } = await getBooksRequest();
       const books = data.map((book: IBook, i: number) => ({
         ...book,

@@ -1,4 +1,5 @@
 export interface IBookState {
+  isFetching: boolean;
   books: IBook[];
   filteredBooks: IBook[];
   favoriteBooks: IBook['isbn'][];

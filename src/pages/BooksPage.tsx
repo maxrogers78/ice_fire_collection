@@ -1,28 +1,15 @@
-import { useEffect, useState } from 'react';
-import { AiOutlinePlusCircle } from 'react-icons/ai';
+import { useState } from 'react';
 import { useBook } from '../hooks';
 import { BooksFilters, Button, Loader } from '../components';
 import { BooksTable } from '../components';
 import { AddBookModal, CustomModal } from '../modals';
+import { BiBookAdd } from 'react-icons/bi';
 
 const BooksPage = () => {
-  const { getBooks } = useBook();
-  const [isLoading, setIsLoading] = useState(true);
+  const { isFetching } = useBook();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  useEffect(() => {
-    loadBooksData();
-  }, []);
-
-  const loadBooksData = async () => {
-    setIsLoading(true);
-
-    await getBooks();
-
-    setIsLoading(false);
-  };
-
-  if (isLoading)
+  if (isFetching)
     return (
       <div className="flex h-full w-full items-center justify-center">
         <Loader />
@@ -37,7 +24,7 @@ const BooksPage = () => {
         <div className="ml-auto">
           <Button
             text="Nuevo libro"
-            icon={<AiOutlinePlusCircle />}
+            icon={<BiBookAdd />}
             onClick={() => setIsModalOpen(true)}
           />
         </div>

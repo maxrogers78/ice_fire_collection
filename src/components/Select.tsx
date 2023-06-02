@@ -33,7 +33,7 @@ const Select = ({
         name={name}
         id={id}
         onChange={handleOnChange}
-        className={`peer w-full px-5 pb-2 pt-6 font-light outline-none ${classes}`}
+        className={`peer w-full border border-l-0 border-sky-600 px-5 pb-2 pt-6 font-light outline-none invalid:border-red-600 ${classes}`}
         required={required}
         defaultValue="0"
       >

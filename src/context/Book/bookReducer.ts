@@ -15,6 +15,7 @@ export const bookReducer = (
     case 'getBooks':
       return {
         ...state,
+        isFetching: false,
         books: action.payload
       };
 

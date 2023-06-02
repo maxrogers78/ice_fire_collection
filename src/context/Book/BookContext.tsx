@@ -2,6 +2,7 @@ import { createContext } from 'react';
 import { IBook, IBookFilterValues, IBookNew } from '../../interfaces';
 
 interface IBookContext {
+  isFetching: boolean;
   books: IBook[];
   filteredBooks: IBook[];
   favoriteBooks: IBook['isbn'][];
