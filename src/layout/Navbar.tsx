@@ -5,7 +5,7 @@ const Navbar = () => {
   const { favoriteBooks } = useBook();
 
   return (
-    <header className="flex h-[76px] w-full items-center justify-between px-24 py-6">
+    <header className="flex h-[76px] w-full items-center justify-between px-4 py-6 md:px-12 lg:px-24">
       <Link to="/" className="text-xl font-bold">
         <span className="text-sky-400">Ice</span>
         <span className="text-base">&</span>

@@ -28,12 +28,12 @@ const BooksFilters = () => {
   };
 
   return (
-    <motion.div className="w-full flex-1 rounded-lg bg-gray-100 px-12 py-6">
+    <motion.div className="w-full rounded-lg bg-gray-100 p-4 lg:px-12 lg:py-6">
       <h2 className="font-bold uppercase">Filtros</h2>
 
       <form
         onSubmit={handleSubmit}
-        className="mt-4 flex w-full items-stretch justify-between gap-4"
+        className="mt-4 flex w-full flex-col items-stretch justify-between gap-4 lg:flex-row"
       >
         <Input
           id="name"
@@ -51,14 +51,21 @@ const BooksFilters = () => {
           placeholder="Autor"
         />
 
-        <Button type="submit" text="Buscar" icon={<BiSearch />} />
-        <button
-          type="button"
-          className="group h-auto rounded-lg border-2 border-sky-500 bg-red-200 bg-transparent px-4 text-lg text-sky-500"
-          onClick={handleResetFilters}
-        >
-          <AiOutlineReload className="transition-transform group-hover:rotate-180" />
-        </button>
+        <div className="flex items-stretch justify-center gap-4">
+          <Button
+            type="submit"
+            text="Buscar"
+            icon={<BiSearch />}
+            classes="w-full lg:w-max"
+          />
+          <button
+            type="button"
+            className="group h-auto rounded-lg border-2 border-sky-500 bg-red-200 bg-transparent px-4 text-lg text-sky-500"
+            onClick={handleResetFilters}
+          >
+            <AiOutlineReload className="transition-transform group-hover:rotate-180" />
+          </button>
+        </div>
       </form>
     </motion.div>
   );

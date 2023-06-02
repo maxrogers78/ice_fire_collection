@@ -30,7 +30,7 @@ const BooksPage = () => {
     );
 
   return (
-    <div className="w-full">
+    <div className="w-full overflow-hidden">
       <div className="flex w-full flex-col gap-8">
         <BooksFilters />
         <BooksTable />

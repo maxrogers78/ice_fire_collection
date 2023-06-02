@@ -11,6 +11,7 @@ interface Props {
   icon?: JSX.Element | JSX.Element[];
   isLoading?: boolean;
   showLoadingIcon?: boolean;
+  classes?: string;
 }
 
 const Button = ({
@@ -20,13 +21,14 @@ const Button = ({
   onClick,
   icon,
   isLoading,
-  showLoadingIcon
+  showLoadingIcon,
+  classes
 }: Props) => {
   return (
     <button
       type={type}
       onClick={onClick}
-      className={`flex h-auto w-max items-center justify-center gap-2 rounded-br-2xl rounded-tl-2xl border-2 px-6 py-3 text-lg transition-all hover:rounded-bl-2xl hover:rounded-br-none hover:rounded-tl-none hover:rounded-tr-2xl
+      className={`flex h-auto w-full items-center justify-center gap-2 rounded-br-2xl rounded-tl-2xl border-2 px-6 py-3 text-lg transition-all hover:rounded-bl-2xl hover:rounded-br-none hover:rounded-tl-none hover:rounded-tr-2xl ${classes}
         ${variant === 'primary' ? 'border-sky-500 bg-sky-500 text-gray-50' : ''}
         ${
           variant === 'secondary'

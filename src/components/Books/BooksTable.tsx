@@ -6,6 +6,7 @@ import { useBook } from '../../hooks';
 import { IBookTable } from '../../interfaces';
 import { BookDetailsModal, CustomModal } from '../../modals';
 import { BooksTableItem } from '.';
+import { BiChevronUp } from 'react-icons/bi';
 
 const BooksTable = () => {
   const { filteredBooks, selectedBook } = useBook();
@@ -29,24 +30,30 @@ const BooksTable = () => {
   }, [filteredBooks]);
 
   return (
-    <div className="w-full">
+    <div className="h-full w-full overflow-x-scroll">
       {filteredBooks.length > 0 ? (
-        <table
-          {...getTableProps()}
-          className="table w-full table-auto text-center"
-        >
+        <table {...getTableProps()} className="w-full table-auto text-center">
           <thead className="bg-sky-600 font-bold text-gray-100">
             {headerGroups.map((headerGroup) => (
               <tr {...headerGroup.getHeaderGroupProps()} className="child:p-3">
                 {headerGroup.headers.map((column) => (
                   <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                    {column.render('Header')}
+                    <div className="flex w-full items-center justify-center gap-2">
+                      {column.render('Header')}
+                      {column.isSorted && (
+                        <BiChevronUp
+                          className={`transition-transform
+                            ${column.isSortedDesc ? 'rotate-0' : 'rotate-180'}
+                          `}
+                        />
+                      )}
+                    </div>
                   </th>
                 ))}
               </tr>
             ))}
           </thead>
-          <tbody {...getTableBodyProps()}>
+          <tbody {...getTableBodyProps()} className="w-full">
             {rows.map((row) => {
               prepareRow(row);
               return (
